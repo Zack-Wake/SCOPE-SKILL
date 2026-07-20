@@ -238,6 +238,12 @@ The Tier A building-survey records (`building-survey-head.json`, `building-surve
 
 These records are **validation fixtures only** — not design input. The schema is niche-agnostic. No field in this schema is specific to building surveys or any other niche.
 
+**Provenance:** The table below was derived by reading the following files on 2026-07-19, read-only, with no modifications made to the FIND repo:
+- `C:\REPOS\find-skill\data\handoffs\building-survey-head.json`
+- `C:\REPOS\find-skill\data\handoffs\building-survey-cost.json`
+
+These files live in the FIND repo (`C:\REPOS\find-skill`), which is outside this repo. They are not copied or reproduced here.
+
 **Key fixture facts to remain consistent with:**
 
 | Fact | Fixture value | Schema implication |
