@@ -45,7 +45,7 @@ Flat structure. No nested objects except `skills_required` (array of objects) an
 | `niche_id` | string | `niche_id` | Slug. Primary key for this spec. |
 | `niche_label` | string | `niche_label` | Human-readable niche name. |
 | `head_keyword` | string | `head_keyword` | Primary target keyword. |
-| `cluster_keywords` | string[] | `cluster_keywords` | Supporting keyword cluster. |
+| `cluster_keywords` | string[] | `cluster_keywords` | Supporting keyword cluster. ⚠ See §7 (Known errata). |
 | `cluster_volume` | number | `cluster_volume` | Estimated monthly search volume. |
 | `volume_confidence` | enum | `volume_confidence` | `"low"` / `"med"` / `"high"`. |
 | `competition_tier` | enum | `competition_tier` | `"GREEN"` / `"YELLOW"` / `"ORANGE"`. Informs build ambition. |
@@ -260,3 +260,13 @@ The following are out of scope for S2-001 and captured here so they do not derai
 - **SCOPE skill logic** — the actual Claude Code skill that reads a handoff record and produces these artifacts. S2-001 defines the contract; the skill is a separate packet (S2-002).
 - **`monetisation_hypothesis` depth** — full monetisation implementation belongs to S5 MONETISE. The hypothesis field is intentionally shallow.
 - **Multi-record batching** — SCOPE currently processes one record at a time. Batch processing (multiple niches in one session) is a future packet.
+
+---
+
+## 7. Known errata
+
+**`cluster_keywords` — format mismatch between vault_schema.md and emitted JSON**
+
+`vault_schema.md` documents the `cluster_keywords` column as "comma-separated" (a single string). The actual emitted handoff files use a JSON array (e.g. `["survey level 3", "cost", "template", "near me"]`). `scope_schema.md` follows the emitted format and types this field as `string[]`.
+
+This is an unresolved discrepancy. Neither form is canonical here — vault_schema.md is authoritative for the Vault Sheet column layout; the emitted JSON files are authoritative for what SCOPE actually receives. The inconsistency sits between those two documents. Do not resolve it in this schema; a future packet must align vault_schema.md, the emit script, and this schema together.
