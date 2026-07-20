@@ -1,43 +1,55 @@
-# SCOPE — Build Spec Stage
-
-Part of the FORGE personal build pipeline.
+# SCOPE — Stage 2 of FORGE
 
 ## What this is
 
-SCOPE is stage two of FORGE. It takes one niche record from FIND (a Vault-band, Tier A/B/C entry) and produces a build spec BUILD can execute without asking questions.
+Stage 2 of the FORGE pipeline. Takes one validated niche from FIND and
+writes the build spec BUILD works from — what's being built, why, for
+whom, and to what standard.
 
-## The six stages
+## In / out
 
-```
-FIND → SCOPE → BUILD → RANK → MONETISE → PUBLISH
-```
+**In:** one Vault handoff record from FIND (`schema_version 1.2`,
+25 fields, defined in the FIND repo's `vault_schema.md`). One record
+in, one spec out.
 
-- **FIND** — rank niches best→worst from one seed (SERP Opportunity Finder)
-- **SCOPE** — cheapest effective build spec + pick the build tool (this repo)
-- **BUILD** — scaffold the site (Next.js + Supabase)
-- **RANK** — SEO it to the top
-- **MONETISE** — wire in revenue (affiliate / ads / lead-gen / own-product, possibly several)
-- **PUBLISH** — deploy, harden, monitor, iterate
+**Out:**
+- a machine-readable handoff (JSON) BUILD consumes
+- a written build plan (markdown) a human can read, edit and approve
 
-See `CLAUDE.md` for the data flow, build-target rules, autonomy ladder, and handoff contracts.
+Both are self-sufficient — BUILD never needs to reach back into FIND.
 
-## What SCOPE outputs
+## The job in one line
 
-Two artifacts per niche:
+Produce a plan detailed enough that BUILD can create a site that looks
+like a good human made it, without stopping to ask what was meant.
 
-1. `data/specs/<niche_id>.json` — machine-readable SCOPE→BUILD handoff. Flat, self-sufficient. BUILD never reads back into FIND.
-2. `data/plans/<niche_id>.md` — written build plan. Every page, layout intent, content requirement, and skill invocation named.
+## What it decides
 
-The contract defining both artifacts is `scope_schema.md`.
+System type and archetype · build target · domain and hosting · page
+map · per-page search intent · differentiation · monetisation
+hypothesis (sketch only) · which skills BUILD must invoke.
+
+## What it doesn't
+
+Ranking niches (FIND) · deep monetisation (MONETISE) · SEO execution
+(RANK) · deploy and iterate (PUBLISH). SCOPE seeds those stages, it
+doesn't run them.
+
+## Design rules
+
+- Generic and niche-agnostic — any niche FIND emits, forever
+- Contract before logic
+- Search intent before keywords
+- Adapt competitor patterns, never clone them
+- Flag gaps honestly; never estimate a number into looking solid
 
 ## Status
 
-Schema contract defined (S2-001). Stage logic not yet built. Next: S2-002 will define the SCOPE skill itself against this contract.
+Not built. First packet: **S2-001** — define `scope_schema.md`, the
+SCOPE→BUILD contract. No logic until the contract is agreed.
 
 ## How to work in this repo
 
-Packet workflow. Pick a Ready packet → branch → build to the Definition of Done → review the diff → mark Done. One packet, one branch, one session. New ideas become Draft packets, not detours.
-
-## Quality bar
-
-BUILD raises no questions caused by ambiguity or missing decisions after reading the spec.
+One packet, one branch, one session. Branch → build to the Definition
+of Done → PR → human review → merge. New ideas become Draft packets,
+not detours. See `CLAUDE.md` for the full rules.
