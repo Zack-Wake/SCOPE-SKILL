@@ -25,23 +25,25 @@ Do not invoke when:
 
 ## How to run
 
+No install needed — stdlib only.
+
 From the repo root:
 
 ```
-python scripts/run.py <path-to-handoff-record>
+node scripts/run.js <path-to-handoff-record>
 ```
 
 To run on the bundled fixture:
 
 ```
-python scripts/run.py fixtures/building-survey-head.json
+node scripts/run.js fixtures/building-survey-head.json
 ```
 
 Output goes to `data/specs/` and `data/plans/` by default. Pass a second argument to
 override the output directory:
 
 ```
-python scripts/run.py fixtures/building-survey-head.json my-output/
+node scripts/run.js fixtures/building-survey-head.json my-output/
 ```
 
 ## What it checks (hard failures — halts on any)
@@ -90,5 +92,5 @@ open questions, competitor notes). All S2 content is TODO.
 
 ## Requirements
 
-- Python 3.x (stdlib only — no external packages)
+- Node.js (stdlib only — no external packages, no npm install)
 - Input record must be a valid JSON file conforming to vault_schema.md v1.2

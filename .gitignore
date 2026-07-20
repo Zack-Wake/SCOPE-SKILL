@@ -1,7 +1,3 @@
-__pycache__/
-*.pyc
-*.pyo
-
 # Runtime output — not committed; see fixtures/sample-output/ for one labelled sample
 data/specs/
 data/plans/
