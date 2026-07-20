@@ -45,8 +45,10 @@ doesn't run them.
 
 ## Status
 
-Not built. First packet: **S2-001** — define `scope_schema.md`, the
-SCOPE→BUILD contract. No logic until the contract is agreed.
+Contract defined (`scope_schema.md`, S2-001). Skeleton built (S2-001
+continued): `scripts/run.py` loads a Vault handoff record, validates it
+against the preconditions, and emits both contract artifacts with all S2
+decision fields as explicit TODO markers. Decision logic is the next packet.
 
 ## How to work in this repo
 
