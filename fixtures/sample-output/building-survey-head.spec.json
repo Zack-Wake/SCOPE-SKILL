@@ -1,0 +1,53 @@
+{
+  "schema_version": "2.0",
+  "scoped_at": "2026-07-20",
+  "plan_confidence": "LOW",
+  "niche_id": "building-survey-head",
+  "niche_label": "Building survey (head)",
+  "head_keyword": "building survey",
+  "cluster_keywords": [
+    "survey level 3",
+    "cost",
+    "template",
+    "near me"
+  ],
+  "cluster_volume": 8100,
+  "volume_confidence": "low",
+  "competition_tier": "ORANGE",
+  "opportunity_tier": "C",
+  "monetisation_tag": "lead-gen-professional",
+  "rpv_low": 8,
+  "rpv_high": 35,
+  "monthly_revenue_low": 1620,
+  "monthly_revenue_high": 7087.5,
+  "revenue_confidence": "med",
+  "s1_notes": "REAL DATA: 8,100/mo, £7.70 CPC. STRONGEST LOCAL SIGNAL OF SESSION - both horshamsurveyors.co.uk and sussexsurveyors.com rank on the bare head term. Only RICS as brand, no wall. | volume triangulated: KS 8,100 + UB 6.6K, both UK, 2026-07-14; robust to £800 gate at 6,600. volume_confidence LOW (triangulated, not KP-verified)",
+  "system_type": "TODO: [SCOPE decision required — website / web-app / software]",
+  "archetype": "TODO: [SCOPE decision required — lead-gen / commerce / content / directory / tool / hybrid]",
+  "build_target": "TODO: [SCOPE decision required — claude-code / replit / lovable]",
+  "build_target_reason": "TODO: [one or two sentences explaining why this target was chosen over the other two — must be specific, not 'best fit']",
+  "domain_proposed": "TODO: [proposed domain name, e.g. niche-hub.co.uk — a recommendation, not a purchase instruction]",
+  "hosting_decision": "TODO: [hosting approach including platform, tier, and reason — e.g. 'Vercel — free tier, suits Next.js static export']",
+  "monetisation_hypothesis": "TODO: [sketch of revenue mechanism, visitor action, and value capture — depth capped here; MONETISE skill owns implementation]",
+  "differentiation": "TODO: [one to three specific edges where this build wins — must name at least one meaningful edge; 'good design' alone fails]",
+  "competitor_notes_manual": null,
+  "skills_required": [
+    {
+      "skill": "TODO: [skill name as it appears in a /skill-name invocation]",
+      "step": 0,
+      "phase": "TODO: [phase label — design / scaffold / content / test / review]",
+      "purpose": "TODO: [one sentence: what decision or output this skill produces at this step]"
+    }
+  ],
+  "pages": [
+    {
+      "slug": "TODO: [URL slug — e.g. / or /cost or /about]",
+      "page_type": "TODO: [landing / content / tool / listing / contact / about / legal]",
+      "search_intent": "TODO: [mandatory — what the searcher is trying to find or get answered, as a specific user goal, not a category label]",
+      "layout_intent": "TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]",
+      "content_requirements": [
+        "TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]"
+      ]
+    }
+  ]
+}
