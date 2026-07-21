@@ -46,9 +46,9 @@
       "page_type": "landing",
       "source": "archetype baseline: lead-gen → landing",
       "search_intent": "TODO: [search_intent — source: head_keyword \"building survey\"]",
-      "layout_intent": "TODO: [layout_intent]",
+      "layout_intent": "TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]",
       "content_requirements": [
-        "TODO: [content_requirements]"
+        "TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]"
       ]
     },
     {
@@ -56,9 +56,9 @@
       "page_type": "about",
       "source": "archetype baseline: lead-gen → about",
       "search_intent": "TODO: [search_intent — source: archetype baseline lead-gen → about]",
-      "layout_intent": "TODO: [layout_intent]",
+      "layout_intent": "TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]",
       "content_requirements": [
-        "TODO: [content_requirements]"
+        "TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]"
       ]
     },
     {
@@ -66,9 +66,9 @@
       "page_type": "contact",
       "source": "archetype baseline: lead-gen → contact",
       "search_intent": "TODO: [search_intent — source: archetype baseline lead-gen → contact]",
-      "layout_intent": "TODO: [layout_intent]",
+      "layout_intent": "TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]",
       "content_requirements": [
-        "TODO: [content_requirements]"
+        "TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]"
       ]
     },
     {
@@ -76,9 +76,9 @@
       "page_type": "content",
       "source": "cluster_keyword: \"survey level 3\"",
       "search_intent": "TODO: [search_intent — source: cluster_keyword \"survey level 3\"]",
-      "layout_intent": "TODO: [layout_intent]",
+      "layout_intent": "TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]",
       "content_requirements": [
-        "TODO: [content_requirements]"
+        "TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]"
       ]
     },
     {
@@ -86,9 +86,9 @@
       "page_type": "content",
       "source": "cluster_keyword: \"cost\"",
       "search_intent": "TODO: [search_intent — source: cluster_keyword \"cost\"]",
-      "layout_intent": "TODO: [layout_intent]",
+      "layout_intent": "TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]",
       "content_requirements": [
-        "TODO: [content_requirements]"
+        "TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]"
       ]
     },
     {
@@ -96,9 +96,9 @@
       "page_type": "content",
       "source": "cluster_keyword: \"template\"",
       "search_intent": "TODO: [search_intent — source: cluster_keyword \"template\"]",
-      "layout_intent": "TODO: [layout_intent]",
+      "layout_intent": "TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]",
       "content_requirements": [
-        "TODO: [content_requirements]"
+        "TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]"
       ]
     },
     {
@@ -106,9 +106,9 @@
       "page_type": "content",
       "source": "cluster_keyword: \"near me\"",
       "search_intent": "TODO: [search_intent — source: cluster_keyword \"near me\"]",
-      "layout_intent": "TODO: [layout_intent]",
+      "layout_intent": "TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]",
       "content_requirements": [
-        "TODO: [content_requirements]"
+        "TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]"
       ]
     }
   ]

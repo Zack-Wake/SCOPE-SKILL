@@ -49,10 +49,10 @@ TODO: [one to three specific edges where this build wins — must name at least 
 
 **Search intent:** TODO: [search_intent — source: head_keyword "building survey"]
 
-**Layout intent:** TODO: [layout_intent]
+**Layout intent:** TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]
 
 **Content requirements:**
-- TODO: [content_requirements]
+- TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]
 
 ### /about — about
 
@@ -60,10 +60,10 @@ TODO: [one to three specific edges where this build wins — must name at least 
 
 **Search intent:** TODO: [search_intent — source: archetype baseline lead-gen → about]
 
-**Layout intent:** TODO: [layout_intent]
+**Layout intent:** TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]
 
 **Content requirements:**
-- TODO: [content_requirements]
+- TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]
 
 ### /contact — contact
 
@@ -71,10 +71,10 @@ TODO: [one to three specific edges where this build wins — must name at least 
 
 **Search intent:** TODO: [search_intent — source: archetype baseline lead-gen → contact]
 
-**Layout intent:** TODO: [layout_intent]
+**Layout intent:** TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]
 
 **Content requirements:**
-- TODO: [content_requirements]
+- TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]
 
 ### /survey-level-3 — content
 
@@ -82,10 +82,10 @@ TODO: [one to three specific edges where this build wins — must name at least 
 
 **Search intent:** TODO: [search_intent — source: cluster_keyword "survey level 3"]
 
-**Layout intent:** TODO: [layout_intent]
+**Layout intent:** TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]
 
 **Content requirements:**
-- TODO: [content_requirements]
+- TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]
 
 ### /cost — content
 
@@ -93,10 +93,10 @@ TODO: [one to three specific edges where this build wins — must name at least 
 
 **Search intent:** TODO: [search_intent — source: cluster_keyword "cost"]
 
-**Layout intent:** TODO: [layout_intent]
+**Layout intent:** TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]
 
 **Content requirements:**
-- TODO: [content_requirements]
+- TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]
 
 ### /template — content
 
@@ -104,10 +104,10 @@ TODO: [one to three specific edges where this build wins — must name at least 
 
 **Search intent:** TODO: [search_intent — source: cluster_keyword "template"]
 
-**Layout intent:** TODO: [layout_intent]
+**Layout intent:** TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]
 
 **Content requirements:**
-- TODO: [content_requirements]
+- TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]
 
 ### /near-me — content
 
@@ -115,10 +115,10 @@ TODO: [one to three specific edges where this build wins — must name at least 
 
 **Search intent:** TODO: [search_intent — source: cluster_keyword "near me"]
 
-**Layout intent:** TODO: [layout_intent]
+**Layout intent:** TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]
 
 **Content requirements:**
-- TODO: [content_requirements]
+- TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]
 
 ---
 

@@ -92,8 +92,8 @@ function derivePageMap(record, archetype) {
       search_intent: isPrimary
         ? `TODO: [search_intent — source: head_keyword "${head}"]`
         : `TODO: [search_intent — source: archetype baseline ${archetype} → ${p.page_type}]`,
-      layout_intent: 'TODO: [layout_intent]',
-      content_requirements: ['TODO: [content_requirements]'],
+      layout_intent: 'TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]',
+      content_requirements: ['TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]'],
     });
   }
 
@@ -104,8 +104,8 @@ function derivePageMap(record, archetype) {
       page_type: baseline.clusterType,
       source: `cluster_keyword: "${kw}"`,
       search_intent: `TODO: [search_intent — source: cluster_keyword "${kw}"]`,
-      layout_intent: 'TODO: [layout_intent]',
-      content_requirements: ['TODO: [content_requirements]'],
+      layout_intent: 'TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]',
+      content_requirements: ['TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]'],
     });
   }
 
