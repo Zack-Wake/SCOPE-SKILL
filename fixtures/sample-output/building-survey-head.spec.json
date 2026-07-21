@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.1",
+  "schema_version": "2.2",
   "scoped_at": "2026-07-21",
   "plan_confidence": "LOW",
   "niche_id": "building-survey-head",
@@ -42,12 +42,73 @@
   ],
   "pages": [
     {
-      "slug": "TODO: [URL slug — e.g. / or /cost or /about]",
-      "page_type": "TODO: [landing / content / tool / listing / contact / about / legal]",
-      "search_intent": "TODO: [mandatory — what the searcher is trying to find or get answered, as a specific user goal, not a category label]",
-      "layout_intent": "TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]",
+      "slug": "/",
+      "page_type": "landing",
+      "source": "archetype baseline: lead-gen → landing",
+      "search_intent": "TODO: [search_intent — source: head_keyword \"building survey\"]",
+      "layout_intent": "TODO: [layout_intent]",
       "content_requirements": [
-        "TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]"
+        "TODO: [content_requirements]"
+      ]
+    },
+    {
+      "slug": "/about",
+      "page_type": "about",
+      "source": "archetype baseline: lead-gen → about",
+      "search_intent": "TODO: [search_intent — source: archetype baseline lead-gen → about]",
+      "layout_intent": "TODO: [layout_intent]",
+      "content_requirements": [
+        "TODO: [content_requirements]"
+      ]
+    },
+    {
+      "slug": "/contact",
+      "page_type": "contact",
+      "source": "archetype baseline: lead-gen → contact",
+      "search_intent": "TODO: [search_intent — source: archetype baseline lead-gen → contact]",
+      "layout_intent": "TODO: [layout_intent]",
+      "content_requirements": [
+        "TODO: [content_requirements]"
+      ]
+    },
+    {
+      "slug": "/survey-level-3",
+      "page_type": "content",
+      "source": "cluster_keyword: \"survey level 3\"",
+      "search_intent": "TODO: [search_intent — source: cluster_keyword \"survey level 3\"]",
+      "layout_intent": "TODO: [layout_intent]",
+      "content_requirements": [
+        "TODO: [content_requirements]"
+      ]
+    },
+    {
+      "slug": "/cost",
+      "page_type": "content",
+      "source": "cluster_keyword: \"cost\"",
+      "search_intent": "TODO: [search_intent — source: cluster_keyword \"cost\"]",
+      "layout_intent": "TODO: [layout_intent]",
+      "content_requirements": [
+        "TODO: [content_requirements]"
+      ]
+    },
+    {
+      "slug": "/template",
+      "page_type": "content",
+      "source": "cluster_keyword: \"template\"",
+      "search_intent": "TODO: [search_intent — source: cluster_keyword \"template\"]",
+      "layout_intent": "TODO: [layout_intent]",
+      "content_requirements": [
+        "TODO: [content_requirements]"
+      ]
+    },
+    {
+      "slug": "/near-me",
+      "page_type": "content",
+      "source": "cluster_keyword: \"near me\"",
+      "search_intent": "TODO: [search_intent — source: cluster_keyword \"near me\"]",
+      "layout_intent": "TODO: [layout_intent]",
+      "content_requirements": [
+        "TODO: [content_requirements]"
       ]
     }
   ]
