@@ -24,7 +24,7 @@ function _buildSpec(record, flags) {
 
   return {
     // --- Identity and provenance ---
-    schema_version: '2.0',
+    schema_version: '2.1',
     scoped_at: today,
     plan_confidence: confidence,
     // --- S1 fields carried forward verbatim ---
