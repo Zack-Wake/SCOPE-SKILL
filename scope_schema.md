@@ -34,7 +34,7 @@ Flat structure. No nested objects except `skills_required` (array of objects) an
 
 | Field | Type | Required | Meaning |
 |---|---|---|---|
-| `schema_version` | string | Yes | SCOPE schema version. Value: `"2.1"`. Bump on any contract change. See §8 for changelog. |
+| `schema_version` | string | Yes | SCOPE schema version. Value: `"2.2"`. Bump on any contract change. See §8 for changelog. |
 | `scoped_at` | string (ISO date) | Yes | Date this spec was produced (YYYY-MM-DD). |
 | `plan_confidence` | enum | Yes | `"LOW"` / `"MED"` / `"HIGH"`. LOW when competitor data absent or `revenue_confidence` is low. MED is the standard working confidence. HIGH requires human-observed competitor data AND verified revenue. |
 
@@ -94,6 +94,7 @@ One entry per page. Every page must have a `search_intent` — this field is man
 |---|---|---|---|
 | `slug` | string | Yes | URL slug (e.g. `"/"`, `"/cost"`, `"/about"`). |
 | `page_type` | enum | Yes | `"landing"` / `"content"` / `"tool"` / `"listing"` / `"contact"` / `"about"` / `"legal"`. |
+| `source` | string | Yes | What produced this page slot. Two forms: **baseline** — `"archetype baseline: <archetype> → <page_type>"` (page exists because the archetype rule requires it). **keyword** — `"cluster_keyword: \"<keyword>\""` (page derives from a cluster keyword, quoted verbatim). Preserved for traceability; BUILD does not act on this field directly. |
 | `search_intent` | string | Yes | **Mandatory.** What the searcher is trying to find or get answered. Written as a specific user goal, not a category. Example: `"Find out what a full structural survey costs for a 3-bed house in the UK"` — not `"Informational"`. |
 | `layout_intent` | string | Yes | The structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order. Sufficient for BUILD to make layout decisions without designing from scratch. |
 | `content_requirements` | string[] | Yes | Ordered list of content decisions: H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions (e.g. schema markup, specific data). At least one entry per page. |
@@ -284,5 +285,6 @@ This is an unresolved discrepancy. Neither form is canonical here — vault_sche
 
 | Version | Change | Reason |
 |---|---|---|
+| `2.2` | Added `source` field to §2.3 pages array | Formalises the page provenance field required by S2-014 (page-map derivation); contract must precede code that depends on it. |
 | `2.1` | Added `inference_basis` field to §2.1 S2 decisions table | Formalises the traceability field introduced by S2-011 (archetype inference); contract must precede code that depends on it. |
 | `2.0` | Initial contract | S2-001 baseline. |
