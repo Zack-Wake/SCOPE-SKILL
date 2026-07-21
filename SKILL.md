@@ -8,10 +8,9 @@ preconditions in `scope_schema.md`, and emits both SCOPE→BUILD contract artifa
 - `data/specs/<niche_id>.json` — machine-readable handoff (Output A)
 - `data/plans/<niche_id>.md` — written build plan (Output B)
 
-**Current state — S2 skeleton only.** All S2 decision fields (system_type, archetype,
-build_target, page map, skills_required, etc.) are emitted as explicit TODO markers.
-Decision logic is added in later packets. This skeleton proves the load→validate→emit
-pipeline is correct before any logic is layered in.
+**Current state — S2-011.** `system_type` and `archetype` are now inferred from
+`monetisation_tag` using the rule table below. All other S2 decision fields remain
+explicit TODO markers and are filled by later packets.
 
 ## When to invoke
 
@@ -46,6 +45,29 @@ override the output directory:
 node scripts/run.js fixtures/building-survey-head.json my-output/
 ```
 
+## Inference rules: system_type and archetype
+
+Primary input: `monetisation_tag` from the vault record. Rules match on tag prefix.
+Every rule is generic — it applies to any niche carrying that tag value.
+To add coverage: append a row here and add the matching entry to `RULES` in `scripts/infer.js`.
+
+| monetisation_tag prefix | system_type | archetype | Rationale |
+|---|---|---|---|
+| `lead-gen-` | `website` | `lead-gen` | Lead-gen site; CMS-driven, no app logic needed |
+| `affiliate-` | `website` | `content` | Content-driven affiliate; article/review structure |
+| `ecommerce-` | `website` | `commerce` | Product catalogue + checkout |
+| `commerce-` | `website` | `commerce` | As above |
+| `saas-` | `web-app` | `tool` | Subscription SaaS; requires accounts + backend |
+| `tool-` | `web-app` | `tool` | Interactive tool; dynamic features required |
+| `directory-` | `website` | `directory` | Listing/directory; filterable index pages |
+| `content-` | `website` | `content` | Pure content play; no significant app logic |
+| `software-` | `software` | `tool` | Downloadable or installable product |
+
+**No match:** Both `system_type` and `archetype` remain `TODO`. The `inference_basis` field
+in the JSON spec records the unmapped tag. Human decision required before BUILD proceeds.
+
+---
+
 ## What it checks (hard failures — halts on any)
 
 | Check | Failure message |
@@ -71,8 +93,11 @@ Never substitutes a default. Never fabricates a missing value.
 - All S1 fields carried forward verbatim
 - `schema_version`: "2.0" (SCOPE output schema)
 - `scoped_at`: today's date
-- `plan_confidence`: computed from flags (always LOW in skeleton)
-- All S2 decision fields as explicit TODO strings
+- `plan_confidence`: computed from flags (always LOW until competitor data present)
+- `system_type`: inferred from monetisation_tag (or TODO if unmapped)
+- `archetype`: inferred from monetisation_tag (or TODO if unmapped)
+- `inference_basis`: which rule fired and from which input value (or UNMAPPED message)
+- All remaining S2 decision fields as explicit TODO strings
 - `competitor_notes_manual`: null
 - `skills_required`: one TODO placeholder entry
 - `pages`: one TODO placeholder entry
@@ -84,7 +109,7 @@ open questions, competitor notes). All S2 content is TODO.
 
 ## What this skill does NOT do
 
-- No decision logic — system_type, archetype, build_target are all TODO
+- No build-target selection — build_target remains TODO (next packet)
 - No page map generation
 - No monetisation reasoning
 - No domain or hosting selection

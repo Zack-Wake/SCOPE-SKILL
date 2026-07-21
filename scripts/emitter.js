@@ -1,6 +1,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const { infer } = require('./infer');
 
 function _planConfidence(record, competitorNotesManual) {
   if (competitorNotesManual === null) return 'LOW';
@@ -13,9 +14,17 @@ function _buildSpec(record, flags) {
   const confidence = _planConfidence(record, competitorNotesManual);
   const today = new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD in local time
 
+  const inferResult = infer(record);
+  const system_type = inferResult.system_type !== null
+    ? inferResult.system_type
+    : 'TODO: [SCOPE decision required — website / web-app / software]';
+  const archetype = inferResult.archetype !== null
+    ? inferResult.archetype
+    : 'TODO: [SCOPE decision required — lead-gen / commerce / content / directory / tool / hybrid]';
+
   return {
     // --- Identity and provenance ---
-    schema_version: '2.0',
+    schema_version: '2.1',
     scoped_at: today,
     plan_confidence: confidence,
     // --- S1 fields carried forward verbatim ---
@@ -34,9 +43,12 @@ function _buildSpec(record, flags) {
     monthly_revenue_high: record.monthly_revenue_high,
     revenue_confidence: record.revenue_confidence,
     s1_notes: record.notes !== undefined ? record.notes : null,
-    // --- S2 decisions — all TODO: decision logic added in later packets ---
-    system_type: 'TODO: [SCOPE decision required — website / web-app / software]',
-    archetype: 'TODO: [SCOPE decision required — lead-gen / commerce / content / directory / tool / hybrid]',
+    // --- S2 decisions ---
+    system_type,
+    archetype,
+    // inference_basis: traces which rule fired and from which input value.
+    // ⚠ SCHEMA GAP: this field is not yet in scope_schema.md — follow-up packet required.
+    inference_basis: inferResult.inference_basis,
     build_target: 'TODO: [SCOPE decision required — claude-code / replit / lovable]',
     build_target_reason: "TODO: [one or two sentences explaining why this target was chosen over the other two — must be specific, not 'best fit']",
     domain_proposed: 'TODO: [proposed domain name, e.g. niche-hub.co.uk — a recommendation, not a purchase instruction]',
@@ -106,6 +118,7 @@ function _buildPlan(record, flags, spec) {
     '## 2. Build decision',
     '',
     `- **System type and archetype:** ${spec.system_type} / ${spec.archetype}`,
+    `  - Basis: ${spec.inference_basis}`,
     `- **Build target:** ${spec.build_target}`,
     `  - Reason: ${spec.build_target_reason}`,
     `- **Domain:** ${spec.domain_proposed}`,
