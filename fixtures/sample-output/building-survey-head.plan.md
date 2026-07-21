@@ -1,9 +1,9 @@
 # Build Plan — Building survey (head)
 
 niche_id:         building-survey-head
-scoped_at:        2026-07-20
+scoped_at:        2026-07-21
 plan_confidence:  LOW
-build_target:     TODO: [SCOPE decision required — claude-code / replit / lovable]
+build_target:     claude-code
 opportunity_tier: C
 
 ---
@@ -16,9 +16,10 @@ TODO: [two to four sentences — what the niche is, who the searcher is, and why
 
 ## 2. Build decision
 
-- **System type and archetype:** TODO: [SCOPE decision required — website / web-app / software] / TODO: [SCOPE decision required — lead-gen / commerce / content / directory / tool / hybrid]
-- **Build target:** TODO: [SCOPE decision required — claude-code / replit / lovable]
-  - Reason: TODO: [one or two sentences explaining why this target was chosen over the other two — must be specific, not 'best fit']
+- **System type and archetype:** website / lead-gen
+  - Basis: rule matched: monetisation_tag "lead-gen-professional" (prefix "lead-gen-") → system_type "website", archetype "lead-gen"
+- **Build target:** claude-code
+  - Reason: rule matched: website/lead-gen → claude-code; lead-gen sites need Next.js page control and form-backend wiring; Lovable's template-first pace cannot provide this and Replit is prototype-grade.
 - **Domain:** TODO: [proposed domain name, e.g. niche-hub.co.uk — a recommendation, not a purchase instruction]
 - **Hosting:** TODO: [hosting approach including platform, tier, and reason — e.g. 'Vercel — free tier, suits Next.js static export']
 
