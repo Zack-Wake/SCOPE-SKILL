@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const { infer } = require('./infer');
+const { selectTarget } = require('./select-target');
 
 function _planConfidence(record, competitorNotesManual) {
   if (competitorNotesManual === null) return 'LOW';
@@ -21,6 +22,12 @@ function _buildSpec(record, flags) {
   const archetype = inferResult.archetype !== null
     ? inferResult.archetype
     : 'TODO: [SCOPE decision required — lead-gen / commerce / content / directory / tool / hybrid]';
+
+  const targetResult = selectTarget(system_type, archetype);
+  const build_target = targetResult.build_target !== null
+    ? targetResult.build_target
+    : 'TODO: [SCOPE decision required — claude-code / replit / lovable]';
+  const build_target_reason = targetResult.build_target_reason;
 
   return {
     // --- Identity and provenance ---
@@ -49,8 +56,8 @@ function _buildSpec(record, flags) {
     // inference_basis: traces which rule fired and from which input value.
     // ⚠ SCHEMA GAP: this field is not yet in scope_schema.md — follow-up packet required.
     inference_basis: inferResult.inference_basis,
-    build_target: 'TODO: [SCOPE decision required — claude-code / replit / lovable]',
-    build_target_reason: "TODO: [one or two sentences explaining why this target was chosen over the other two — must be specific, not 'best fit']",
+    build_target,
+    build_target_reason,
     domain_proposed: 'TODO: [proposed domain name, e.g. niche-hub.co.uk — a recommendation, not a purchase instruction]',
     hosting_decision: "TODO: [hosting approach including platform, tier, and reason — e.g. 'Vercel — free tier, suits Next.js static export']",
     monetisation_hypothesis: 'TODO: [sketch of revenue mechanism, visitor action, and value capture — depth capped here; MONETISE skill owns implementation]',

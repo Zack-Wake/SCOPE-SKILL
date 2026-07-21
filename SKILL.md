@@ -8,8 +8,9 @@ preconditions in `scope_schema.md`, and emits both SCOPE→BUILD contract artifa
 - `data/specs/<niche_id>.json` — machine-readable handoff (Output A)
 - `data/plans/<niche_id>.md` — written build plan (Output B)
 
-**Current state — S2-011.** `system_type` and `archetype` are now inferred from
-`monetisation_tag` using the rule table below. All other S2 decision fields remain
+**Current state — S2-002.** `system_type` and `archetype` are inferred from
+`monetisation_tag` (S2-011). `build_target` is now selected from `system_type` +
+`archetype` using the rule table below. All other S2 decision fields remain
 explicit TODO markers and are filled by later packets.
 
 ## When to invoke
@@ -91,12 +92,14 @@ Never substitutes a default. Never fabricates a missing value.
 
 **JSON spec (`data/specs/<niche_id>.json`):**
 - All S1 fields carried forward verbatim
-- `schema_version`: "2.0" (SCOPE output schema)
+- `schema_version`: "2.1" (SCOPE output schema)
 - `scoped_at`: today's date
 - `plan_confidence`: computed from flags (always LOW until competitor data present)
 - `system_type`: inferred from monetisation_tag (or TODO if unmapped)
 - `archetype`: inferred from monetisation_tag (or TODO if unmapped)
 - `inference_basis`: which rule fired and from which input value (or UNMAPPED message)
+- `build_target`: selected from system_type + archetype (or TODO if upstream unresolved or combination unmapped)
+- `build_target_reason`: the rule that fired and why the other two targets were not chosen (or TODO with cascade reason)
 - All remaining S2 decision fields as explicit TODO strings
 - `competitor_notes_manual`: null
 - `skills_required`: one TODO placeholder entry
@@ -107,12 +110,35 @@ All 8 required sections present (header block, niche summary, build decision,
 monetisation hypothesis, differentiation, page inventory, skills to invoke,
 open questions, competitor notes). All S2 content is TODO.
 
+## Build-target selection rules: build_target
+
+Primary inputs: `system_type` and `archetype` from the inference step (S2-011).
+Rules match on the exact combination. Every rule is generic — it applies to any niche
+with that system_type + archetype pair.
+To add coverage: append a row here and add the matching entry to `RULES` in `scripts/select-target.js`.
+
+| system_type | archetype | build_target | Rationale |
+|---|---|---|---|
+| `website` | `lead-gen` | `claude-code` | Lead-gen needs Next.js page control and form-backend wiring; Lovable's template-first pace cannot provide this and Replit is prototype-grade |
+| `website` | `content` | `lovable` | Content sites are UI-first with no backend; Lovable exports fast static pages and syncs via GitHub; Claude Code's full stack is not justified |
+| `website` | `commerce` | `claude-code` | Commerce needs payment integration and a product data layer; Next.js + Supabase handles checkout and API routes; Lovable cannot wire a payment provider |
+| `website` | `directory` | `claude-code` | Directory builds need database-backed filterable listings; Supabase + Next.js handles the data model and page scale; Lovable has no data layer |
+| `website` | `hybrid` | `claude-code` | Hybrid archetypes have mixed concerns requiring full-stack control; Lovable and Replit are too constrained for undetermined hybrid requirements |
+| `web-app` | `tool` | `claude-code` | Web-app signals production accounts and backend; Next.js + Supabase is the correct stack; Replit is prototype-grade and Lovable has no backend depth |
+| `software` | `tool` | `claude-code` | Software builds require local toolchain and terminal access; only Claude Code supports build and packaging workflows |
+
+**No match (UNMAPPED combination):** `build_target` stays TODO and `build_target_reason` names the unresolved combination. Human decision required before BUILD proceeds.
+
+**Upstream TODO cascade:** If `system_type` or `archetype` is still TODO (inference step produced no rule match), `build_target` stays TODO and `build_target_reason` states that upstream resolution is required.
+
+---
+
 ## What this skill does NOT do
 
-- No build-target selection — build_target remains TODO (next packet)
 - No page map generation
-- No monetisation reasoning
+- No page map generation
 - No domain or hosting selection
+- No monetisation reasoning
 - No reading from the FIND repo (fixture is the sole input source after copy)
 
 ## Requirements
