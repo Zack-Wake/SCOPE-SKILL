@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { infer } = require('./infer');
 const { selectTarget } = require('./select-target');
+const { derivePageMap } = require('./page-map');
 
 function _planConfidence(record, competitorNotesManual) {
   if (competitorNotesManual === null) return 'LOW';
@@ -29,9 +30,25 @@ function _buildSpec(record, flags) {
     : 'TODO: [SCOPE decision required — claude-code / replit / lovable]';
   const build_target_reason = targetResult.build_target_reason;
 
+  const pageResult = derivePageMap(record, archetype);
+  const pages = pageResult.pages !== null
+    ? pageResult.pages
+    : [
+        {
+          slug: 'TODO: [URL slug — e.g. / or /cost or /about]',
+          page_type: 'TODO: [landing / content / tool / listing / contact / about / legal]',
+          source: `TODO: [page map not derived — ${pageResult.cascade_reason}]`,
+          search_intent: 'TODO: [mandatory — what the searcher is trying to find or get answered, as a specific user goal, not a category label]',
+          layout_intent: 'TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]',
+          content_requirements: [
+            'TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]',
+          ],
+        },
+      ];
+
   return {
     // --- Identity and provenance ---
-    schema_version: '2.1',
+    schema_version: '2.2',
     scoped_at: today,
     plan_confidence: confidence,
     // --- S1 fields carried forward verbatim ---
@@ -53,8 +70,6 @@ function _buildSpec(record, flags) {
     // --- S2 decisions ---
     system_type,
     archetype,
-    // inference_basis: traces which rule fired and from which input value.
-    // ⚠ SCHEMA GAP: this field is not yet in scope_schema.md — follow-up packet required.
     inference_basis: inferResult.inference_basis,
     build_target,
     build_target_reason,
@@ -71,17 +86,7 @@ function _buildSpec(record, flags) {
         purpose: 'TODO: [one sentence: what decision or output this skill produces at this step]',
       },
     ],
-    pages: [
-      {
-        slug: 'TODO: [URL slug — e.g. / or /cost or /about]',
-        page_type: 'TODO: [landing / content / tool / listing / contact / about / legal]',
-        search_intent: 'TODO: [mandatory — what the searcher is trying to find or get answered, as a specific user goal, not a category label]',
-        layout_intent: 'TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]',
-        content_requirements: [
-          'TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]',
-        ],
-      },
-    ],
+    pages,
   };
 }
 
@@ -170,6 +175,8 @@ function _buildPlan(record, flags, spec) {
   for (const page of spec.pages) {
     lines.push(
       `### ${page.slug} — ${page.page_type}`,
+      '',
+      `**Source:** ${page.source}`,
       '',
       `**Search intent:** ${page.search_intent}`,
       '',

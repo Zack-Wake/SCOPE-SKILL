@@ -8,9 +8,10 @@ preconditions in `scope_schema.md`, and emits both SCOPE→BUILD contract artifa
 - `data/specs/<niche_id>.json` — machine-readable handoff (Output A)
 - `data/plans/<niche_id>.md` — written build plan (Output B)
 
-**Current state — S2-002.** `system_type` and `archetype` are inferred from
-`monetisation_tag` (S2-011). `build_target` is now selected from `system_type` +
-`archetype` using the rule table below. All other S2 decision fields remain
+**Current state — S2-014.** `system_type` and `archetype` are inferred from
+`monetisation_tag` (S2-011). `build_target` is selected from `system_type` +
+`archetype` (S2-002). The `pages` array is now derived from `archetype`, `head_keyword`,
+and `cluster_keywords` using the rule tables below. All other S2 decision fields remain
 explicit TODO markers and are filled by later packets.
 
 ## When to invoke
@@ -100,10 +101,10 @@ Never substitutes a default. Never fabricates a missing value.
 - `inference_basis`: which rule fired and from which input value (or UNMAPPED message)
 - `build_target`: selected from system_type + archetype (or TODO if upstream unresolved or combination unmapped)
 - `build_target_reason`: the rule that fired and why the other two targets were not chosen (or TODO with cascade reason)
-- All remaining S2 decision fields as explicit TODO strings
+- All remaining top-level S2 decision fields as explicit TODO strings
 - `competitor_notes_manual`: null
 - `skills_required`: one TODO placeholder entry
-- `pages`: one TODO placeholder entry
+- `pages`: derived array — one entry per baseline structural page plus one per cluster keyword (or single TODO entry if archetype unresolved)
 
 **Markdown plan (`data/plans/<niche_id>.md`):**
 All 8 required sections present (header block, niche summary, build decision,
@@ -133,10 +134,57 @@ To add coverage: append a row here and add the matching entry to `RULES` in `scr
 
 ---
 
+## Page-map derivation rules: pages array
+
+Primary inputs: `archetype` (from S2-011), `head_keyword`, and `cluster_keywords` from the vault record.
+To add coverage: update the baseline table here AND the `BASELINE` object in `scripts/page-map.js`.
+
+**Cascade:** If `archetype` is TODO or unmapped, the `pages` array keeps a single TODO entry and the `source` field names the block. No pages are invented.
+
+### Baseline page sets (structural pages per archetype)
+
+The first entry in each archetype is the primary page (`/`), anchored to `head_keyword` in its `search_intent` TODO. Remaining entries are structural pages always present for that archetype.
+
+| archetype | slug | page_type | search_intent TODO references |
+|---|---|---|---|
+| `lead-gen` | `/` | `landing` | head_keyword |
+| `lead-gen` | `/about` | `about` | archetype baseline |
+| `lead-gen` | `/contact` | `contact` | archetype baseline |
+| `content` | `/` | `landing` | head_keyword |
+| `content` | `/about` | `about` | archetype baseline |
+| `commerce` | `/` | `landing` | head_keyword |
+| `commerce` | `/about` | `about` | archetype baseline |
+| `commerce` | `/contact` | `contact` | archetype baseline |
+| `directory` | `/` | `listing` | head_keyword |
+| `directory` | `/about` | `about` | archetype baseline |
+| `directory` | `/contact` | `contact` | archetype baseline |
+| `tool` | `/` | `tool` | head_keyword |
+| `tool` | `/about` | `about` | archetype baseline |
+| `hybrid` | `/` | `landing` | head_keyword |
+| `hybrid` | `/about` | `about` | archetype baseline |
+
+### Cluster keyword pages
+
+Each entry in `cluster_keywords` produces one additional page. `page_type` is determined by archetype:
+
+| archetype | cluster keyword page_type |
+|---|---|
+| `lead-gen` | `content` |
+| `content` | `content` |
+| `commerce` | `listing` |
+| `directory` | `listing` |
+| `tool` | `content` |
+| `hybrid` | `content` |
+
+- **slug:** keyword slugified (`/` + lowercase, spaces and punctuation → hyphens)
+- **source:** `cluster_keyword: "<keyword verbatim>"`
+- **search_intent:** `TODO: [search_intent — source: cluster_keyword "<keyword verbatim>"]`
+
+---
+
 ## What this skill does NOT do
 
-- No page map generation
-- No page map generation
+- No search_intent authoring — slots and provenance only (S2-014 creates the slot; a later packet authors intent)
 - No domain or hosting selection
 - No monetisation reasoning
 - No reading from the FIND repo (fixture is the sole input source after copy)

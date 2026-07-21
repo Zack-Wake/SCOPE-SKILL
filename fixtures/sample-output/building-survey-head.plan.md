@@ -43,9 +43,77 @@ TODO: [one to three specific edges where this build wins — must name at least 
 
 ## 5. Page inventory
 
-### TODO: [URL slug — e.g. / or /cost or /about] — TODO: [landing / content / tool / listing / contact / about / legal]
+### / — landing
 
-**Search intent:** TODO: [mandatory — what the searcher is trying to find or get answered, as a specific user goal, not a category label]
+**Source:** archetype baseline: lead-gen → landing
+
+**Search intent:** TODO: [search_intent — source: head_keyword "building survey"]
+
+**Layout intent:** TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]
+
+**Content requirements:**
+- TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]
+
+### /about — about
+
+**Source:** archetype baseline: lead-gen → about
+
+**Search intent:** TODO: [search_intent — source: archetype baseline lead-gen → about]
+
+**Layout intent:** TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]
+
+**Content requirements:**
+- TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]
+
+### /contact — contact
+
+**Source:** archetype baseline: lead-gen → contact
+
+**Search intent:** TODO: [search_intent — source: archetype baseline lead-gen → contact]
+
+**Layout intent:** TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]
+
+**Content requirements:**
+- TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]
+
+### /survey-level-3 — content
+
+**Source:** cluster_keyword: "survey level 3"
+
+**Search intent:** TODO: [search_intent — source: cluster_keyword "survey level 3"]
+
+**Layout intent:** TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]
+
+**Content requirements:**
+- TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]
+
+### /cost — content
+
+**Source:** cluster_keyword: "cost"
+
+**Search intent:** TODO: [search_intent — source: cluster_keyword "cost"]
+
+**Layout intent:** TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]
+
+**Content requirements:**
+- TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]
+
+### /template — content
+
+**Source:** cluster_keyword: "template"
+
+**Search intent:** TODO: [search_intent — source: cluster_keyword "template"]
+
+**Layout intent:** TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]
+
+**Content requirements:**
+- TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]
+
+### /near-me — content
+
+**Source:** cluster_keyword: "near me"
+
+**Search intent:** TODO: [search_intent — source: cluster_keyword "near me"]
 
 **Layout intent:** TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]
 
