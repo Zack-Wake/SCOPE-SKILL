@@ -34,7 +34,7 @@ Flat structure. No nested objects except `skills_required` (array of objects) an
 
 | Field | Type | Required | Meaning |
 |---|---|---|---|
-| `schema_version` | string | Yes | SCOPE schema version. Value: `"2.0"`. Bump on any contract change. |
+| `schema_version` | string | Yes | SCOPE schema version. Value: `"2.1"`. Bump on any contract change. See §8 for changelog. |
 | `scoped_at` | string (ISO date) | Yes | Date this spec was produced (YYYY-MM-DD). |
 | `plan_confidence` | enum | Yes | `"LOW"` / `"MED"` / `"HIGH"`. LOW when competitor data absent or `revenue_confidence` is low. MED is the standard working confidence. HIGH requires human-observed competitor data AND verified revenue. |
 
@@ -64,6 +64,7 @@ Flat structure. No nested objects except `skills_required` (array of objects) an
 |---|---|---|---|
 | `system_type` | enum | Yes | `"website"` — static or CMS-driven, no significant app logic. `"web-app"` — user accounts, dynamic features, significant backend. `"software"` — downloadable, installable, or SaaS. |
 | `archetype` | enum | Yes | `"lead-gen"` / `"commerce"` / `"content"` / `"directory"` / `"tool"` / `"hybrid"`. The structural model that organises the site. |
+| `inference_basis` | string | Yes | Traces the rule that set `system_type` and `archetype`. Two forms: **match** — `"rule matched: monetisation_tag \"<value>\" (prefix \"<prefix>\") → system_type \"<type>\", archetype \"<archetype>\""`. **miss (UNMAPPED)** — `"UNMAPPED: no rule for monetisation_tag \"<value>\"; system_type and archetype remain TODO"`. |
 | `build_target` | enum | Yes | `"claude-code"` / `"replit"` / `"lovable"`. Which build tool BUILD will use. |
 | `build_target_reason` | string | Yes | One or two sentences explaining why this target was chosen over the others. Specific — not "best fit". |
 | `domain_proposed` | string | Yes | Proposed domain name (e.g. `"building-survey-hub.co.uk"`). A recommendation, not a purchase instruction. |
@@ -276,3 +277,12 @@ The following are out of scope for S2-001 and captured here so they do not derai
 `vault_schema.md` documents the `cluster_keywords` column as "comma-separated" (a single string). The actual emitted handoff files use a JSON array (e.g. `["survey level 3", "cost", "template", "near me"]`). `scope_schema.md` follows the emitted format and types this field as `string[]`.
 
 This is an unresolved discrepancy. Neither form is canonical here — vault_schema.md is authoritative for the Vault Sheet column layout; the emitted JSON files are authoritative for what SCOPE actually receives. The inconsistency sits between those two documents. Do not resolve it in this schema; a future packet must align vault_schema.md, the emit script, and this schema together.
+
+---
+
+## 8. Changelog
+
+| Version | Change | Reason |
+|---|---|---|
+| `2.1` | Added `inference_basis` field to §2.1 S2 decisions table | Formalises the traceability field introduced by S2-011 (archetype inference); contract must precede code that depends on it. |
+| `2.0` | Initial contract | S2-001 baseline. |
