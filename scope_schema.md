@@ -74,7 +74,7 @@ Flat structure. No nested objects except `skills_required` (array of objects) an
 | `competitor_notes_manual` | string \| null | No | Human-observed competitor notes: top-ranking sites, their approach, gaps spotted. `null` when absent. When present, also set `plan_confidence` appropriately. Automated enrichment (via S1 future packet) will populate this field later; this slot reserves the space. |
 | `skills_required` | object[] | Yes | Ordered list of skills BUILD must invoke. See §2.2. |
 | `pages` | object[] | Yes | One entry per page in the build. See §2.3. At least one page required. |
-| `pages_flagged_for_review` | object[] | Yes | Cluster keywords that were not converted to pages because they matched a generic search modifier. Always present; empty `[]` when nothing was flagged. NOT nullable. See §2.4. |
+| `pages_flagged_for_review` | object[] | Yes | Modifier-flagged cluster keywords not converted to pages. See §2.4. |
 
 ### 2.2 `skills_required` array
 
