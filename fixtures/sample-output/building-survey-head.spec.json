@@ -1,6 +1,6 @@
 {
-  "schema_version": "2.2",
-  "scoped_at": "2026-07-21",
+  "schema_version": "2.3",
+  "scoped_at": "2026-07-22",
   "plan_confidence": "LOW",
   "niche_id": "building-survey-head",
   "niche_label": "Building survey (head)",
@@ -100,16 +100,13 @@
       "content_requirements": [
         "TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]"
       ]
-    },
+    }
+  ],
+  "pages_flagged_for_review": [
     {
-      "slug": "/near-me",
-      "page_type": "content",
-      "source": "cluster_keyword: \"near me\"",
-      "search_intent": "TODO: [search_intent — source: cluster_keyword \"near me\"]",
-      "layout_intent": "TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]",
-      "content_requirements": [
-        "TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]"
-      ]
+      "keyword": "near me",
+      "modifier_matched": "near me",
+      "reason": "search modifier, not a topic — human review required"
     }
   ]
 }
