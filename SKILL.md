@@ -180,6 +180,30 @@ Each entry in `cluster_keywords` produces one additional page. `page_type` is de
 - **source:** `cluster_keyword: "<keyword verbatim>"`
 - **search_intent:** `TODO: [search_intent — source: cluster_keyword "<keyword verbatim>"]`
 
+### Search modifier triage
+
+Before a cluster keyword is converted to a page it is tested against a generic modifier list. A keyword that matches any modifier is not converted — it is placed in `pages_flagged_for_review` instead. Human review is required before it is added as a page or discarded.
+
+Matching is case-insensitive and word-boundary-aware for single-word modifiers; multi-word modifiers (e.g. `near me`) use substring matching.
+
+To add a modifier: append a row here AND add the term to `SEARCH_MODIFIERS` in `scripts/page-map.js`.
+
+| Modifier | Match type | Reason for flag |
+|---|---|---|
+| `near me` | substring | Local intent signal, not a content topic |
+| `near you` | substring | Local intent signal, not a content topic |
+| `nearby` | word boundary | Local intent signal, not a content topic |
+| `best` | word boundary | Superlative qualifier; no distinct content angle |
+| `cheap` | word boundary | Price qualifier; no distinct content angle |
+| `free` | word boundary | Price qualifier; no distinct content angle |
+| `top` | word boundary | Superlative qualifier; no distinct content angle |
+| `how to` | substring | Navigational prefix; intent belongs on the primary page |
+
+**Output for each flagged keyword** (in `pages_flagged_for_review`):
+- `keyword`: verbatim from the input record
+- `modifier_matched`: the specific modifier term that triggered the flag
+- `reason`: `"search modifier, not a topic — human review required"`
+
 ---
 
 ## What this skill does NOT do

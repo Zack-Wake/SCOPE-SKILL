@@ -53,6 +53,34 @@ const BASELINE = {
   },
 };
 
+// Generic search modifiers — cluster keywords containing any of these are flagged
+// rather than converted to pages. Each entry is matched case-insensitively at
+// word boundaries. Multi-word entries (e.g. "near me") use substring matching.
+// To extend: add a term here AND update the modifier table in SKILL.md.
+const SEARCH_MODIFIERS = [
+  'near me',
+  'near you',
+  'nearby',
+  'best',
+  'cheap',
+  'free',
+  'top',
+  'how to',
+];
+
+function _matchModifier(keyword) {
+  const lower = keyword.toLowerCase();
+  for (const modifier of SEARCH_MODIFIERS) {
+    const pattern = modifier.includes(' ')
+      ? modifier
+      : `(?:^|[^a-z])${modifier}(?:[^a-z]|$)`;
+    if (new RegExp(pattern).test(lower)) {
+      return modifier;
+    }
+  }
+  return null;
+}
+
 const TODO_PREFIX = 'TODO:';
 
 function _slugify(keyword) {
@@ -66,6 +94,7 @@ function derivePageMap(record, archetype) {
   if (typeof archetype === 'string' && archetype.startsWith(TODO_PREFIX)) {
     return {
       pages: null,
+      pages_flagged_for_review: [],
       cascade_reason: `archetype unresolved — page map cannot be derived until archetype is decided`,
     };
   }
@@ -74,6 +103,7 @@ function derivePageMap(record, archetype) {
   if (!baseline) {
     return {
       pages: null,
+      pages_flagged_for_review: [],
       cascade_reason: `UNMAPPED archetype "${archetype}" — no baseline page set defined; human decision required`,
     };
   }
@@ -81,6 +111,7 @@ function derivePageMap(record, archetype) {
   const head = record.head_keyword;
   const clusters = Array.isArray(record.cluster_keywords) ? record.cluster_keywords : [];
   const pages = [];
+  const pages_flagged_for_review = [];
 
   // Baseline structural pages (primary page always first)
   for (const p of baseline.pages) {
@@ -97,19 +128,28 @@ function derivePageMap(record, archetype) {
     });
   }
 
-  // One content page per cluster keyword
+  // One page per cluster keyword unless it matches a generic search modifier
   for (const kw of clusters) {
-    pages.push({
-      slug: _slugify(kw),
-      page_type: baseline.clusterType,
-      source: `cluster_keyword: "${kw}"`,
-      search_intent: `TODO: [search_intent — source: cluster_keyword "${kw}"]`,
-      layout_intent: 'TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]',
-      content_requirements: ['TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]'],
-    });
+    const matched = _matchModifier(kw);
+    if (matched !== null) {
+      pages_flagged_for_review.push({
+        keyword: kw,
+        modifier_matched: matched,
+        reason: 'search modifier, not a topic — human review required',
+      });
+    } else {
+      pages.push({
+        slug: _slugify(kw),
+        page_type: baseline.clusterType,
+        source: `cluster_keyword: "${kw}"`,
+        search_intent: `TODO: [search_intent — source: cluster_keyword "${kw}"]`,
+        layout_intent: 'TODO: [structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order]',
+        content_requirements: ['TODO: [H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions]'],
+      });
+    }
   }
 
-  return { pages, cascade_reason: null };
+  return { pages, pages_flagged_for_review, cascade_reason: null };
 }
 
 module.exports = { derivePageMap };

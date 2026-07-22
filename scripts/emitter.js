@@ -45,10 +45,11 @@ function _buildSpec(record, flags) {
           ],
         },
       ];
+  const pages_flagged_for_review = pageResult.pages_flagged_for_review;
 
   return {
     // --- Identity and provenance ---
-    schema_version: '2.2',
+    schema_version: '2.3',
     scoped_at: today,
     plan_confidence: confidence,
     // --- S1 fields carried forward verbatim ---
@@ -87,6 +88,7 @@ function _buildSpec(record, flags) {
       },
     ],
     pages,
+    pages_flagged_for_review,
   };
 }
 
