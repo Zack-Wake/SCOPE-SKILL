@@ -34,7 +34,7 @@ Flat structure. No nested objects except `skills_required` (array of objects) an
 
 | Field | Type | Required | Meaning |
 |---|---|---|---|
-| `schema_version` | string | Yes | SCOPE schema version. Value: `"2.2"`. Bump on any contract change. See §8 for changelog. |
+| `schema_version` | string | Yes | SCOPE schema version. Value: `"2.3"`. Bump on any contract change. See §8 for changelog. |
 | `scoped_at` | string (ISO date) | Yes | Date this spec was produced (YYYY-MM-DD). |
 | `plan_confidence` | enum | Yes | `"LOW"` / `"MED"` / `"HIGH"`. LOW when competitor data absent or `revenue_confidence` is low. MED is the standard working confidence. HIGH requires human-observed competitor data AND verified revenue. |
 
@@ -74,6 +74,7 @@ Flat structure. No nested objects except `skills_required` (array of objects) an
 | `competitor_notes_manual` | string \| null | No | Human-observed competitor notes: top-ranking sites, their approach, gaps spotted. `null` when absent. When present, also set `plan_confidence` appropriately. Automated enrichment (via S1 future packet) will populate this field later; this slot reserves the space. |
 | `skills_required` | object[] | Yes | Ordered list of skills BUILD must invoke. See §2.2. |
 | `pages` | object[] | Yes | One entry per page in the build. See §2.3. At least one page required. |
+| `pages_flagged_for_review` | object[] | Yes | Modifier-flagged cluster keywords not converted to pages. See §2.4. |
 
 ### 2.2 `skills_required` array
 
@@ -98,6 +99,16 @@ One entry per page. Every page must have a `search_intent` — this field is man
 | `search_intent` | string | Yes | **Mandatory.** What the searcher is trying to find or get answered. Written as a specific user goal, not a category. Example: `"Find out what a full structural survey costs for a 3-bed house in the UK"` — not `"Informational"`. |
 | `layout_intent` | string | Yes | The structural logic of this page: what occupies the hero, how the page converts or progresses, key sections in order. Sufficient for BUILD to make layout decisions without designing from scratch. |
 | `content_requirements` | string[] | Yes | Ordered list of content decisions: H1 direction, key claims to make, trust signals needed, CTAs, any mandatory inclusions (e.g. schema markup, specific data). At least one entry per page. |
+
+### 2.4 `pages_flagged_for_review` array
+
+Cluster keywords that matched a generic search modifier and were therefore not converted to pages. Always present in the emitted spec — `[]` when no keywords were flagged. Never null. Human review is required before any flagged keyword is added as a page or discarded.
+
+| Sub-field | Type | Required | Meaning |
+|---|---|---|---|
+| `keyword` | string | Yes | The cluster keyword verbatim, exactly as it appears in the input record. |
+| `modifier_matched` | string | Yes | The specific modifier term that triggered the flag (e.g. `"near me"`, `"best"`, `"cheap"`). |
+| `reason` | string | Yes | Human-readable explanation. Value: `"search modifier, not a topic — human review required"`. |
 
 ---
 
@@ -285,6 +296,7 @@ This is an unresolved discrepancy. Neither form is canonical here — vault_sche
 
 | Version | Change | Reason |
 |---|---|---|
+| `2.3` | Added `pages_flagged_for_review` array (§2.4) to Output A; added corresponding row to §2.1 top-level fields | Formalises the modifier-flag list required by S2-016 (page-slot triage); contract must precede code that depends on it. |
 | `2.2` | Added `source` field to §2.3 pages array | Formalises the page provenance field required by S2-014 (page-map derivation); contract must precede code that depends on it. |
 | `2.1` | Added `inference_basis` field to §2.1 S2 decisions table | Formalises the traceability field introduced by S2-011 (archetype inference); contract must precede code that depends on it. |
 | `2.0` | Initial contract | S2-001 baseline. |
